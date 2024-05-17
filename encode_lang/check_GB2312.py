@@ -1,10 +1,11 @@
+# -*- coding: utf-8 -*-
 from opencc import OpenCC
 
 # 初始化 OpenCC 转换器
 cc = OpenCC('s2t')  # 简体到繁体
 
 # 判断字符是否是简体和繁体相同
-def is_simplified_and_traditional_same(char):
+def is_not_simplified_and_traditional_same(char):
     traditional_char = cc.convert(char)
     return not char == traditional_char
 
@@ -20,7 +21,7 @@ def is_gb2312_char(char):
 
 def contains_simplified_chinese(string):
     for char in string:
-        if '\u4e00' <= char <= '\u9fff' and is_gb2312_char(char) and is_simplified_and_traditional_same(char):        
+        if '\u4e00' <= char <= '\u9fff' and is_gb2312_char(char) and is_not_simplified_and_traditional_same(char):        
             return True
     return False
 
@@ -37,10 +38,13 @@ test_strings = [
     '简体和繁體混合'  # 混合
 ]
 
-# 检查字符串数组
-for test_string in test_strings:
-    if contains_simplified_chinese(test_string):
-        print(f"字符串 '{test_string}' 包含简体字")
-        append_string_to_file(test_string)
-    else:
-        print(f"字符串 '{test_string}' 不包含简体字")
+
+if __name__ == "__main__":
+
+    # 检查字符串数组
+    for test_string in test_strings:
+        if contains_simplified_chinese(test_string):
+            print(f"字符串 '{test_string}' 包含简体字")
+            append_string_to_file(test_string)
+        else:
+            print(f"字符串 '{test_string}' 不包含简体字")
