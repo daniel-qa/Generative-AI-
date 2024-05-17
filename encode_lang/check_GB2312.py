@@ -9,7 +9,7 @@ def is_simplified_and_traditional_same(char):
     return not char == traditional_char
 
 
-# 是簡體字，則排除，會排除與繁體字共用的部分
+# 判斷字串是否有簡體字，則排除，會排除與繁體字共用的部分
 def is_gb2312_char(char):
     try:
         # 尝试将字符编码为 GB2312
@@ -32,6 +32,7 @@ def append_string_to_file(string, file_path="log.txt"):
 test_strings = [
     '测试文字档案！',  # 全部是简体字
     '時間',  # 全部是繁体字,並且沒有與簡體共用
+    '我是',  # 全部是繁体字,並與簡體共用
     'Hello, World!',  # 英文
     '简体和繁體混合'  # 混合
 ]
